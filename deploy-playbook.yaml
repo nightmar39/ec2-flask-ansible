@@ -1,0 +1,24 @@
+---
+
+- name: Copy files from S3
+  remote_user: ec2-user
+  become: yes
+  tasks:
+    - name: Copy from S3 bucket
+      ansible.builtin.command:
+        cmd: "aws s3 sync s3://flask-gunicorn/flask-gunicorn/ flask-gunicorn"
+    - name: copy gunicorn service
+      ansible.builtin.command:
+        cmd: "cp flask-gunicorn/flaskapp.service /etc/systemd/system"
+    - name: copy nginx config
+      ansible.builtin.command:
+        cmd: "cp flask-gunicorn/conf.d/app.conf /etc/nginx/conf.d"
+    - name: reload daemon 
+      ansible.builtin.command:
+        cmd: "systemctl daemon-reload"
+    - name: start flask service
+      ansible.builtin.command:
+        cmd: "systemctl start flaskapp"
+    - name: start nginx 
+      ansible.builtin.command:
+        cmd: "systemctl start nginx"

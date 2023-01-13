@@ -1,0 +1,12 @@
+[Unit]
+Description=Gunicorn Daemon to serve flask
+After=network.target
+
+[Service]
+User=ec2-user
+Group=ec2-user
+WorkingDirectory=/home/ec2-user/app/
+ExecStart=/home/ec2-user/app/venv/bin/gunicorn app
+
+[Install]
+WantedBy=multi-user.target

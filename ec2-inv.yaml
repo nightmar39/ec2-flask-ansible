@@ -1,4 +1,11 @@
 all:
+<<<<<<< HEAD
   hosts: 
     ec2-3-20-240-102.us-east-2.compute.amazonaws.com
 
+=======
+  hosts:
+    ec2:
+      hosts:
+        ec2-3-20-240-102.us-east-2.compute.amazonaws.com:
+>>>>>>> 6aa29b4 (tested working local)
